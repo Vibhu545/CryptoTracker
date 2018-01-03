@@ -1,5 +1,5 @@
 
-package com.one.cryptotracker;
+package com.one.cryptotracker.cryptotracker.Presenter;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,4 +1,4 @@
-package com.one.cryptotracker;
+package com.one.cryptotracker.cryptotracker.Presenter;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -15,8 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.one.cryptotracker.Presenter.MainMVP;
-import com.one.cryptotracker.USD;
+import com.one.cryptotracker.R;
+import com.one.cryptotracker.cryptotracker.Model.BitcoinResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,12 +46,12 @@ public class BitCoin extends AppCompatActivity implements MainMVP, MainMVP.MainV
         btSetAlertBitCoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            if(bcThreshold < 0.0) {
-                etThreshold.setError("Enter a proper value");
-            }
-            else
+                if(bcThreshold < 0.0) {
+                    etThreshold.setError("Enter a proper value");
+                }
+                else
                 {
-                mainPresenter.alertForBitCoin();
+                    mainPresenter.alertForBitCoin();
                 }
             }
         });
@@ -59,18 +59,18 @@ public class BitCoin extends AppCompatActivity implements MainMVP, MainMVP.MainV
 
     void getData() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.coindesk.com/v1/bpi/currentprice.json/").
-                            addConverterFactory(GsonConverterFactory.create()).build();
+                addConverterFactory(GsonConverterFactory.create()).build();
         ApiImplimentation apiImplimentation = retrofit.create(ApiImplimentation.class);
-        Call<USD> call = apiImplimentation.getBitCoinValue();
-        call.enqueue(new Callback<USD>() {
+        Call<BitcoinResponse> call = apiImplimentation.getBitCoinValue();
+        call.enqueue(new Callback<BitcoinResponse>() {
             @Override
-            public void onResponse(Call<USD> call, Response<USD> response) {
-               USD bitCoinValue = response.body();
-                bitCoinValueFloat = Float.parseFloat(String.valueOf(bitCoinValue));
+            public void onResponse(Call<BitcoinResponse> call, Response<BitcoinResponse> response) {
+                //USD bitCoinValue = response.body();
+                // bitCoinValueFloat = Float.parseFloat(String.valueOf(bitCoinValue));
             }
 
             @Override
-            public void onFailure(Call<USD> call, Throwable t) {
+            public void onFailure(Call<BitcoinResponse> call, Throwable t) {
 
             }
         });
@@ -93,10 +93,10 @@ public class BitCoin extends AppCompatActivity implements MainMVP, MainMVP.MainV
             @Override
             public void run() {
                 getData();
-            if(bitCoinValueFloat < bcThreshold)
-            {
-                addNotification();
-            }
+                if(bitCoinValueFloat < bcThreshold || bitCoinValueFloat < bcThreshold)
+                {
+                    addNotification();
+                }
             }
         }, _TIME_OUT);
     }

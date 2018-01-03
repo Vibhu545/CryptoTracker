@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.one.cryptotracker.MainActivity">
+    tools:context="com.one.cryptotracker.cryptotracker.Presenter.MainActivity">
 
     <TextView
         android:layout_width="match_parent"

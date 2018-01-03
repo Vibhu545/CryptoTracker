@@ -1,6 +1,4 @@
-package com.one.cryptotracker;
-
-import com.one.cryptotracker.Presenter.MainMVP;
+package com.one.cryptotracker.cryptotracker.Presenter;
 
 /**
  * Created by vibhu on 12/25/2017.
